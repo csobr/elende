@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { result, suppliers, contracts, supplierData, bidArea } from '../lib/store';
+  import { result, suppliers, contracts, supplierData, bidArea, price } from '../lib/store';
 
   //  20000 kwh
   const getData = () => {
@@ -30,6 +30,10 @@
 
     contracts.set(contract);
   };
+  const getPrice = () => {
+    let prices = area.find((element) => element.price_ore_per_kwh);
+    price.set(prices.price_ore_per_kwh);
+  };
   onMount(async () => {
     getData();
   });
@@ -50,10 +54,12 @@
     {/each}
   </select>
 
-  <select bind:value={selected.contract}>
+  <select bind:value={selected.contract} on:change={() => getPrice()}>
     <option value="" disabled selected>Välj ditt kontrakt</option>
     {#each $contracts as contract}
       <option value={contract}>{contract}</option>
     {/each}
   </select>
 </form>
+
+<h2>{$price ? `${$price}\n öre` : ''}</h2>
