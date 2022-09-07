@@ -49,7 +49,7 @@
       <span style="--ctr: #03FFA1;--i:20px;--d:10s;" />
       <div class="price">
         <h2>
-          {$price ? `${$price}` : ''}
+          {$price ? `${$price}` : '- -'}
         </h2>
         <p>{$price ? 'öre/kWh' : ''}</p>
       </div>
@@ -159,6 +159,7 @@
   form {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
   }
   select {
     appearance: none;
@@ -168,6 +169,7 @@
     border: none;
     font-size: 1.6rem;
     outline: 0;
+    width: 100%;
   }
   .select {
     display: flex;
