@@ -10,12 +10,6 @@
     bid_area: undefined,
     contract: '' as string
   };
-  //  20000 kwh
-
-  onMount(async () => {
-    const response = await fetch(import.meta.env.VITE_TEST_URL);
-    return result.set(await response.json());
-  });
 
   const handleSupplier = () => {
     if ($result) {
@@ -58,4 +52,4 @@
   </select>
 </form>
 
-<h2>{$price ? `${$price}\n öre` : ''}</h2>
+<h2>{$price ? `${$price}\n öre/kWh` : ''}</h2>
