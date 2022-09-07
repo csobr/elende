@@ -2,22 +2,20 @@
   import { onMount } from 'svelte';
   import { result, suppliers, contracts, supplierData, bidArea, price } from '../lib/store';
 
-  //  20000 kwh
-  const getData = () => {
-    fetch(import.meta.env.VITE_TEST_URL)
-      .then((res) => res.json())
-      .then((data) => result.set(data))
-      .catch((err) => console.log(err.msg));
-  };
-
+  let supplier: any[] | undefined;
+  let area;
+  let contract;
   let selected = {
     supplier: '' as string,
     bid_area: undefined,
     contract: '' as string
   };
-  let supplier: any[] | undefined;
-  let area;
-  let contract;
+  //  20000 kwh
+
+  onMount(async () => {
+    const response = await fetch(import.meta.env.VITE_TEST_URL);
+    return result.set(await response.json());
+  });
 
   const handleSupplier = () => {
     if ($result) {
@@ -34,9 +32,7 @@
     let prices = area.find((element) => element.price_ore_per_kwh);
     price.set(prices.price_ore_per_kwh);
   };
-  onMount(async () => {
-    getData();
-  });
+
   const displaySuppliers = [...new Set($suppliers)];
 </script>
 
