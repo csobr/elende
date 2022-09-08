@@ -112,7 +112,7 @@
   div.content-wrapper {
     z-index: 10;
     width: 50%;
-    height: 50%;
+    height: auto;
     border-radius: 0.3rem;
     background-color: var(--background);
     overflow: hidden;
