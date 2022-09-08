@@ -86,7 +86,7 @@
     </form>
   </div>
 </main>
-<footer>Made by <a href="sihamhadi.com">srh</a></footer>
+<footer>Made by <a target="/" href="https://sihamhadi.com">srh</a></footer>
 
 <style>
   main {
