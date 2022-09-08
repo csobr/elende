@@ -14,6 +14,9 @@
   };
 
   const handleSupplier = () => {
+    if (selected.contract != '') {
+      return (selected.contract = '');
+    }
     if ($result) {
       supplier = $supplierData?.filter((data) => data.supplier === selected.supplier);
     }
@@ -23,16 +26,18 @@
     contract = area.map((data) => data.contract_name);
 
     contracts.set(contract);
+    console.log(selected);
   };
   const getPrice = () => {
     let prices = area.find((element) => element.price_ore_per_kwh);
     price.set(prices.price_ore_per_kwh);
+    console.log(selected);
   };
 
   const displaySuppliers = [...new Set($suppliers)];
 
   onMount(() => {
-    price.set('');
+    price.set('0');
   });
 </script>
 
@@ -46,12 +51,12 @@
       <span style="--ctr:#FFE33E;--i:18px;--d:2.5s;" />
       <span style="--ctr:#03a1d9;--i:13px;--d:5s;" />
       <span style="--ctr:#ecfff1;--i:15px;--d:7.5s;" />
-      <span style="--ctr: #03FFA1;--i:20px;--d:10s;" />
+      <span style="--ctr:#03ffa1a1;--i:20px;--d:10s;" />
       <div class="price">
         <h2>
-          {$price ? `${$price}` : '- -'}
+          {$price ? `${$price}` : '0'}
         </h2>
-        <p>{$price ? 'öre/kWh' : ''}</p>
+        <p>{$price ? 'öre/kWh' : 'öre/kWh'}</p>
       </div>
     </div>
     <form>
@@ -145,15 +150,19 @@
     }
   }
   .price {
-    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
     position: relative;
   }
   h2 {
-    font-weight: 700;
-    font-size: 4.6rem;
+    font-weight: 900;
+    font-size: 4.8rem;
   }
   p {
-    font-size: 2rem;
+    font-size: 1.6rem;
     padding: 1rem;
   }
   form {
