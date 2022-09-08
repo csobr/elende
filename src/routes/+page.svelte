@@ -97,6 +97,7 @@
     align-items: center;
     width: 100%;
     justify-content: space-between;
+    width: 100%;
   }
   h1 {
     grid-column: 2/3;
@@ -120,6 +121,7 @@
   .circle {
     display: flex;
     align-items: center;
+    position: relative;
     justify-content: flex-start;
     width: 25rem;
     height: 25rem;
@@ -127,6 +129,7 @@
   }
 
   .circle span {
+    z-index: 0;
     position: absolute;
     width: calc(25rem + var(--i));
     height: calc(25rem + var(--i));
