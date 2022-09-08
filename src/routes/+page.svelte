@@ -28,14 +28,11 @@
   const handleCurrentSupplier = () => {
     area = supplier?.filter((data) => data.bid_area == selected.bid_area);
     contract = area.map((data) => data.contract_name);
-
     contracts.set(contract);
-    console.log(selected);
   };
   const getPrice = () => {
     let prices = area.find((element) => element.contract_name === selected.contract);
     price.set(prices.price_ore_per_kwh);
-    console.log(selected);
   };
 
   const displaySuppliers = [...new Set($suppliers)];
@@ -99,7 +96,6 @@
   nav {
     display: grid;
     align-items: center;
-    width: 100%;
     justify-content: space-between;
     width: 100%;
   }
