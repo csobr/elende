@@ -60,7 +60,7 @@
           årsförbrukning på 20 000 kWh.
         </p>
         <p>
-          Rörliga priser är alltid föregående månads priser. Priserna är angivna i totalt pris/kWh
+          Rörliga priser är alltid föregående månadspriser. Priserna är angivna i totalt pris/kWh
           och innebär att din samtliga kostnader för förbrukad el är inkluderade, dvs; elpris,
           påslag, avgifter och moms.
         </p>
