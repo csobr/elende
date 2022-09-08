@@ -53,7 +53,7 @@
 
     <div class="content-wrapper">
       <span on:click={close}>Stäng</span>
-
+      <h1>Priserna gäller Augusti 2022</h1>
       <div class="content">
         <p>
           På den här sidan kan du ta del av elleverantörers priser/kWh för konsumenter med en
@@ -64,6 +64,7 @@
           och innebär att din samtliga kostnader för förbrukad el är inkluderade, dvs; elpris,
           påslag, avgifter och moms.
         </p>
+        <p>Ny data från den 16:e varje månad</p>
       </div>
       <footer>
         <p>
