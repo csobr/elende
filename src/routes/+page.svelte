@@ -63,13 +63,13 @@
     <form>
       <div class="select">
         <select bind:value={selected.supplier} on:change={() => handleSupplier()}>
-          <option value="" disabled selected>Välj din elleverantör</option>
+          <option value="" disabled selected>Välj elleverantör</option>
           {#each displaySuppliers as option}<option value={option}>{option}</option>{/each}
         </select>
       </div>
       <div class="select">
         <select bind:value={selected.bid_area} on:change={() => handleCurrentSupplier()}>
-          <option value="" disabled selected>Välj ditt elområde</option>
+          <option value="" disabled selected>Välj elområde</option>
           {#each $bidArea as area}
             <option value={area}>{area}</option>
           {/each}
@@ -77,7 +77,7 @@
       </div>
       <div class="select">
         <select bind:value={selected.contract} on:change={() => getPrice()}>
-          <option value="" disabled selected>Välj ditt kontrakt</option>
+          <option value="" disabled selected>Välj kontrakt</option>
           {#each $contracts as contract}
             <option value={contract}>{contract}</option>
           {/each}
