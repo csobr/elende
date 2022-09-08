@@ -85,7 +85,7 @@
     </form>
   </div>
 </main>
-<footer />
+<footer>Made by <a href="sihamhadi.com">srh</a></footer>
 
 <style>
   main {
@@ -201,5 +201,16 @@
   }
   .select:focus {
     outline: 0.1rem solid var(--accent);
+  }
+  footer {
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.2rem;
+    bottom: 0;
+    position: relative;
+  }
+  footer a {
+    text-decoration: none;
+    color: var(--color);
   }
 </style>
