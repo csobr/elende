@@ -195,7 +195,7 @@
     background: rgba(0, 71, 44, 0.05);
     border: 0;
     border-radius: 0.4rem;
-    margin: 3rem;
+    margin: 2.5rem;
   }
   .select:after {
     content: '🔻';
