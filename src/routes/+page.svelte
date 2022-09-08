@@ -36,16 +36,16 @@
   };
 
   const displaySuppliers = [...new Set($suppliers)];
-
-  onMount(() => {
-    price.set('0');
-  });
 </script>
 
 <main>
   <nav>
     <h1>Månadspriset</h1>
-    <img src="bulb.svg" class="bulb" alt="lightbulb" />
+    <Modal>
+      <div class="bulb" slot="trigger" let:open>
+        <a href="/" on:click={open}> <img src="bulb.svg" alt="lightbulb" /></a>
+      </div>
+    </Modal>
   </nav>
   <div class="wrapper">
     <div class="circle">
