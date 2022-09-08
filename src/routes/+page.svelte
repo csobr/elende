@@ -9,17 +9,21 @@
   let contract;
   let selected = {
     supplier: '' as string,
-    bid_area: undefined,
+    bid_area: '' as string,
     contract: '' as string
   };
 
   const handleSupplier = () => {
-    if (selected.contract != '') {
-      return (selected.contract = '');
+    if (selected.contract && selected.bid_area != '') {
+      selected.contract = '';
+      selected.bid_area = '';
+      price.set('0');
     }
-    if ($result) {
-      supplier = $supplierData?.filter((data) => data.supplier === selected.supplier);
-    }
+
+    supplier = $supplierData?.filter((data) => data.supplier === selected.supplier);
+    area = supplier?.map((data) => data.bid_area);
+    let displayBidArea = [...new Set(area)];
+    bidArea.set(displayBidArea);
   };
   const handleCurrentSupplier = () => {
     area = supplier?.filter((data) => data.bid_area == selected.bid_area);
@@ -29,7 +33,7 @@
     console.log(selected);
   };
   const getPrice = () => {
-    let prices = area.find((element) => element.price_ore_per_kwh);
+    let prices = area.find((element) => element.contract_name === selected.contract);
     price.set(prices.price_ore_per_kwh);
     console.log(selected);
   };
