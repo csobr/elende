@@ -2,7 +2,7 @@ import { writable, derived } from 'svelte/store';
 import data from './data.json';
 export const result = writable(data);
 export const contracts = writable([]);
-export const bidArea = writable([1, 2, 3, 4]);
+export const bidArea = writable(['']);
 export const price = writable('');
 
 export const suppliers = derived(result, ($result) => {
