@@ -17,3 +17,13 @@ export const supplierData = derived(result, ($result) => {
     return Object.values($result.filter((data) => data.supplier));
   }
 });
+export function booleanStore(initial) {
+  const isOpen = writable(initial);
+  const { set, update } = isOpen;
+  return {
+    isOpen,
+    open: () => set(true),
+    close: () => set(false),
+    toggle: () => update((n) => !n)
+  };
+}
