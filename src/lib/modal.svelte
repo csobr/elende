@@ -64,7 +64,7 @@
           och innebär att din samtliga kostnader för förbrukad el är inkluderade, dvs; elpris,
           påslag, avgifter och moms.
         </p>
-        <p>Ny data från den 16:e varje månad</p>
+        <p>Ny data fr om 16:e varje månad</p>
       </div>
       <footer>
         <p>
