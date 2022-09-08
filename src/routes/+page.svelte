@@ -2,8 +2,8 @@
   import { onMount } from 'svelte';
 
   import '../index.css';
-  import { result, suppliers, contracts, supplierData, bidArea, price } from '../lib/store';
-
+  import { suppliers, contracts, supplierData, bidArea, price } from '$lib/store';
+  import Modal from '$lib/modal.svelte';
   let supplier: any[] | undefined;
   let area;
   let contract;
