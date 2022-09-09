@@ -180,7 +180,7 @@
     -moz-appearance: none;
     background-color: transparent;
     border: none;
-    font-size: 1.6rem;
+    font-size: 1.7rem;
     outline: 0;
     width: 100%;
   }
@@ -189,13 +189,14 @@
     align-items: center;
     cursor: pointer;
     width: 100%;
-    height: 5rem;
+    height: 6rem;
     padding: 2rem;
     margin: 0 auto;
     background: rgba(0, 71, 44, 0.05);
     border: 0;
     border-radius: 0.4rem;
     margin: 2.5rem;
+    color: var(--color);
   }
   .select:after {
     content: '🔻';
