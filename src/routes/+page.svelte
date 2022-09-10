@@ -77,7 +77,7 @@
       </div>
       <div class="select">
         <select bind:value={selected.contract} on:change={() => getPrice()}>
-          <option value="" disabled selected>Välj kontrakt</option>
+          <option value="" disabled selected>Välj avtal</option>
           {#each $contracts as contract}
             <option value={contract}>{contract}</option>
           {/each}
