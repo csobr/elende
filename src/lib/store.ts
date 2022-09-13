@@ -1,22 +1,14 @@
-import { writable, derived } from 'svelte/store';
-import data from './data.json';
-export const result = writable(data);
+import { writable } from 'svelte/store';
+import hus from './hus.json';
+import lgh from './lgh.json';
+export const result = writable({ hus: hus, lgh: lgh });
+export const suppliers = writable([]);
+export const supplierData = writable([]);
 export const contracts = writable([]);
 export const bidArea = writable(['']);
 export const price = writable('');
+export const hours = writable('');
 
-export const suppliers = derived(result, ($result) => {
-  if ($result) {
-    return $result.map((data) => data.supplier);
-  }
-  return [];
-});
-
-export const supplierData = derived(result, ($result) => {
-  if ($result) {
-    return Object.values($result.filter((data) => data.supplier));
-  }
-});
 export function booleanStore(initial) {
   const isOpen = writable(initial);
   const { set, update } = isOpen;
