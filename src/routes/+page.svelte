@@ -13,7 +13,7 @@
     contract: '' as string
   };
   let options = [
-    { value: '20000', text: '20000' },
+    { value: '20000', text: '20 000' },
     { value: '2000', text: '2000' }
   ];
   function resetFields() {
@@ -85,7 +85,7 @@
             bind:group={$hours}
             on:change={() => handleInputChange()}
           />
-          <span>{text}</span></label
+          <span>{text} kWh</span></label
         >
       {/each}
     </div>
@@ -167,15 +167,17 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
     height: 5rem;
+    width: 100%;
   }
   .hours {
-    width: 11rem;
     font-size: 2rem;
     font-weight: 600;
     display: grid;
     grid-template-columns: 1em auto;
     gap: 0.5em;
+    padding: 1rem;
   }
   input[type='radio'] {
     -webkit-appearance: none;
