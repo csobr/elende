@@ -1,25 +1,43 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-
   import '../index.css';
-  import { suppliers, contracts, supplierData, bidArea, price } from '$lib/store';
+  import { result, suppliers, contracts, supplierData, bidArea, price, hours } from '$lib/store';
   import Modal from '$lib/modal.svelte';
+  import { onMount } from 'svelte';
   let supplier: any[] | undefined;
   let area;
   let contract;
+
   let selected = {
     supplier: '' as string,
     bid_area: '' as string,
     contract: '' as string
   };
-
-  const handleSupplier = () => {
+  let options = [
+    { value: '20000', text: '20000' },
+    { value: '2000', text: '2000' }
+  ];
+  function resetFields() {
     if (selected.contract && selected.bid_area != '') {
       selected.contract = '';
       selected.bid_area = '';
+      selected.supplier = '';
       price.set('0');
     }
+  }
+  const getDataSource = () => {
+    let dataSource;
 
+    if ($hours === '20000') {
+      dataSource = $result.hus;
+    }
+    if ($hours === '2000') {
+      dataSource = $result.lgh;
+    }
+    supplierData.set(Object.values(dataSource?.filter((data) => data.supplier)));
+    suppliers.set(dataSource?.map((data) => data.supplier));
+  };
+  const handleSupplier = () => {
+    resetFields();
     supplier = $supplierData?.filter((data) => data.supplier === selected.supplier);
     area = supplier?.map((data) => data.bid_area);
     let displayBidArea = [...new Set(area)];
@@ -34,6 +52,14 @@
     let prices = area.find((element) => element.contract_name === selected.contract);
     price.set(prices.price_ore_per_kwh);
   };
+  const handleInputChange = () => {
+    resetFields();
+
+    getDataSource();
+  };
+
+  $hours = '20000';
+  getDataSource();
 
   const displaySuppliers = [...new Set($suppliers)];
 </script>
@@ -47,7 +73,21 @@
       </div>
     </Modal>
   </nav>
+
   <div class="wrapper">
+    {#each options as { value, text }, idx}
+      <label for={text}>
+        <input
+          type="radio"
+          id={idx}
+          {value}
+          bind:group={$hours}
+          on:change={() => handleInputChange()}
+        />
+        <span>{text}</span></label
+      >
+    {/each}
+
     <div class="circle">
       <span style="--ctr:#FFE33E;--i:18px;--d:2.5s;" />
       <span style="--ctr:#03a1d9;--i:13px;--d:5s;" />
@@ -77,7 +117,7 @@
       </div>
       <div class="select">
         <select bind:value={selected.contract} on:change={() => getPrice()}>
-          <option value="" disabled selected>Välj kontrakt</option>
+          <option value="" disabled selected>Välj avtal</option>
           {#each $contracts as contract}
             <option value={contract}>{contract}</option>
           {/each}
