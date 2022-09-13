@@ -57,7 +57,7 @@
       <div class="content">
         <p>
           På den här sidan kan du ta del av elleverantörers priser/kWh för konsumenter med en
-          årsförbrukning på 20 000 kWh.
+          årsförbrukning på 20 000 kWh och 2000 kWh.
         </p>
         <p>
           Rörliga priser är alltid föregående månadspriser. Priserna är angivna i totalt pris/kWh
