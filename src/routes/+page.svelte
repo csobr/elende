@@ -1,25 +1,43 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-
   import '../index.css';
-  import { suppliers, contracts, supplierData, bidArea, price } from '$lib/store';
+  import { result, suppliers, contracts, supplierData, bidArea, price, hours } from '$lib/store';
   import Modal from '$lib/modal.svelte';
+  import { onMount } from 'svelte';
   let supplier: any[] | undefined;
   let area;
   let contract;
+
   let selected = {
     supplier: '' as string,
     bid_area: '' as string,
     contract: '' as string
   };
-
-  const handleSupplier = () => {
+  let options = [
+    { value: '20000', text: '20 000' },
+    { value: '2000', text: '2000' }
+  ];
+  function resetFields() {
     if (selected.contract && selected.bid_area != '') {
       selected.contract = '';
       selected.bid_area = '';
+      selected.supplier = '';
       price.set('0');
     }
+  }
+  const getDataSource = () => {
+    let dataSource;
 
+    if ($hours === '20000') {
+      dataSource = $result.hus;
+    }
+    if ($hours === '2000') {
+      dataSource = $result.lgh;
+    }
+    supplierData.set(Object.values(dataSource?.filter((data) => data.supplier)));
+    suppliers.set(dataSource?.map((data) => data.supplier));
+  };
+  const handleSupplier = () => {
+    resetFields();
     supplier = $supplierData?.filter((data) => data.supplier === selected.supplier);
     area = supplier?.map((data) => data.bid_area);
     let displayBidArea = [...new Set(area)];
@@ -34,6 +52,14 @@
     let prices = area.find((element) => element.contract_name === selected.contract);
     price.set(prices.price_ore_per_kwh);
   };
+  const handleInputChange = () => {
+    resetFields();
+
+    getDataSource();
+  };
+
+  $hours = '20000';
+  getDataSource();
 
   const displaySuppliers = [...new Set($suppliers)];
 </script>
@@ -47,7 +73,22 @@
       </div>
     </Modal>
   </nav>
+
   <div class="wrapper">
+    <div class="radio-buttons">
+      {#each options as { value, text }, idx}
+        <label for={text} class="hours">
+          <input
+            type="radio"
+            id={idx}
+            {value}
+            bind:group={$hours}
+            on:change={() => handleInputChange()}
+          />
+          <span>{text} kWh</span></label
+        >
+      {/each}
+    </div>
     <div class="circle">
       <span style="--ctr:#FFE33E;--i:18px;--d:2.5s;" />
       <span style="--ctr:#03a1d9;--i:13px;--d:5s;" />
@@ -91,14 +132,14 @@
 <style>
   main {
     width: 100%;
-    height: 100vh;
-    padding: 2rem;
+    padding-bottom: 15rem;
   }
   nav {
     display: grid;
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    padding: 1rem;
   }
   h1 {
     grid-column: 2/3;
@@ -110,6 +151,9 @@
   .bulb {
     grid-column: 3/3;
   }
+  .bulb img {
+    height: 4rem;
+  }
 
   .wrapper {
     display: flex;
@@ -117,8 +161,55 @@
     align-items: center;
     flex-direction: column;
     width: 100%;
-    margin-top: 2rem;
+    margin-top: 1rem;
   }
+  .radio-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 5rem;
+    width: 100%;
+  }
+  .hours {
+    font-size: 2rem;
+    font-weight: 600;
+    display: grid;
+    grid-template-columns: 1em auto;
+    gap: 0.5em;
+    padding: 1rem;
+  }
+  input[type='radio'] {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: var(--background);
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid currentColor;
+    border-radius: 50%;
+    transform: translateY(-0.075em);
+    display: grid;
+    place-content: center;
+  }
+  input[type='radio']::before {
+    content: '';
+    width: 0.65em;
+    height: 0.65em;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--color);
+  }
+  input[type='radio']:checked::before {
+    transform: scale(1);
+  }
+
+  .hours:focus-within {
+    color: currentColor;
+  }
+
   .circle {
     display: flex;
     align-items: center;
