@@ -75,19 +75,20 @@
   </nav>
 
   <div class="wrapper">
-    {#each options as { value, text }, idx}
-      <label for={text}>
-        <input
-          type="radio"
-          id={idx}
-          {value}
-          bind:group={$hours}
-          on:change={() => handleInputChange()}
-        />
-        <span>{text}</span></label
-      >
-    {/each}
-
+    <div class="radio-buttons">
+      {#each options as { value, text }, idx}
+        <label for={text} class="hours">
+          <input
+            type="radio"
+            id={idx}
+            {value}
+            bind:group={$hours}
+            on:change={() => handleInputChange()}
+          />
+          <span>{text}</span></label
+        >
+      {/each}
+    </div>
     <div class="circle">
       <span style="--ctr:#FFE33E;--i:18px;--d:2.5s;" />
       <span style="--ctr:#03a1d9;--i:13px;--d:5s;" />
@@ -157,8 +158,53 @@
     align-items: center;
     flex-direction: column;
     width: 100%;
-    margin-top: 2rem;
+    margin-top: 1rem;
   }
+  .radio-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 5rem;
+  }
+  .hours {
+    width: 11rem;
+    font-size: 2rem;
+    font-weight: 600;
+    display: grid;
+    grid-template-columns: 1em auto;
+    gap: 0.5em;
+  }
+  input[type='radio'] {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: var(--background);
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid currentColor;
+    border-radius: 50%;
+    transform: translateY(-0.075em);
+    display: grid;
+    place-content: center;
+  }
+  input[type='radio']::before {
+    content: '';
+    width: 0.65em;
+    height: 0.65em;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--color);
+  }
+  input[type='radio']:checked::before {
+    transform: scale(1);
+  }
+
+  .hours:focus-within {
+    color: currentColor;
+  }
+
   .circle {
     display: flex;
     align-items: center;
