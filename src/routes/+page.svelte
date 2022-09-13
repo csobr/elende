@@ -139,6 +139,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    padding: 1rem;
   }
   h1 {
     grid-column: 2/3;
@@ -149,6 +150,9 @@
   }
   .bulb {
     grid-column: 3/3;
+  }
+  .bulb img {
+    height: 4rem;
   }
 
   .wrapper {
