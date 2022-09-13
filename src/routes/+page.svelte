@@ -132,8 +132,7 @@
 <style>
   main {
     width: 100%;
-    height: 100vh;
-    padding: 2rem;
+    padding-bottom: 15rem;
   }
   nav {
     display: grid;
