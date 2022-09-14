@@ -2,10 +2,18 @@
   import '../index.css';
   import { result, suppliers, contracts, supplierData, bidArea, price, hours } from '$lib/store';
   import Modal from '$lib/modal.svelte';
-  import { onMount } from 'svelte';
+
   let supplier: any[] | undefined;
-  let area;
+  let area: any[] = [];
   let contract;
+  let dataSource: {
+    date: string;
+    bid_area: string;
+    contract: string;
+    supplier: string;
+    contract_name: string;
+    price_ore_per_kwh: string;
+  }[];
 
   let selected = {
     supplier: '' as string,
@@ -25,8 +33,6 @@
     }
   }
   const getDataSource = () => {
-    let dataSource;
-
     if ($hours === '20000') {
       dataSource = $result.hus;
     }
@@ -47,9 +53,12 @@
     area = supplier?.filter((data) => data.bid_area == selected.bid_area);
     contract = area.map((data) => data.contract_name);
     contracts.set(contract);
+    console.log(area);
   };
   const getPrice = () => {
-    let prices = area.find((element) => element.contract_name === selected.contract);
+    let prices = area.find(
+      (element: { contract_name: string }) => element.contract_name === selected.contract
+    );
     price.set(prices.price_ore_per_kwh);
   };
   const handleInputChange = () => {
