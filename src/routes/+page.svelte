@@ -94,7 +94,7 @@
             bind:group={$hours}
             on:change={() => handleInputChange()}
           />
-          <span>{text} kWh</span></label
+          <span>{text} kWh/år</span></label
         >
       {/each}
     </div>
