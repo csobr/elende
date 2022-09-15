@@ -39,7 +39,7 @@
     if ($hours === '2000') {
       dataSource = $result.lgh;
     }
-    supplierData.set(Object.values(dataSource?.filter((data) => data.supplier)));
+    supplierData.set(Object.values(dataSource.filter((data) => data.supplier)));
     suppliers.set(dataSource?.map((data) => data.supplier));
   };
   const handleSupplier = () => {
@@ -53,7 +53,6 @@
     area = supplier?.filter((data) => data.bid_area == selected.bid_area);
     contract = area.map((data) => data.contract_name);
     contracts.set(contract);
-    console.log(area);
   };
   const getPrice = () => {
     let prices = area.find(
@@ -85,11 +84,11 @@
 
   <div class="wrapper">
     <div class="radio-buttons">
-      {#each options as { value, text }, idx}
+      {#each options as { value, text }}
         <label for={text} class="hours">
           <input
             type="radio"
-            id={idx}
+            id={value}
             {value}
             bind:group={$hours}
             on:change={() => handleInputChange()}
