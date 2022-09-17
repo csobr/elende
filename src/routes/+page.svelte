@@ -160,7 +160,7 @@
     grid-column: 3/3;
   }
   .bulb img {
-    height: 4rem;
+    height: 3.5rem;
   }
 
   .wrapper {
