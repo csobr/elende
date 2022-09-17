@@ -72,74 +72,81 @@
   const displaySuppliers = [...new Set($suppliers)];
 </script>
 
-<main>
-  <nav>
-    <h1>Månadspriset</h1>
-    <Modal>
-      <div class="bulb" slot="trigger" let:open>
-        <a href="/" on:click={open}> <img src="bulb.svg" alt="lightbulb" /></a>
-      </div>
-    </Modal>
-  </nav>
+<div class="container">
+  <main>
+    <nav>
+      <h1>Månadspriset</h1>
+      <Modal>
+        <div class="bulb" slot="trigger" let:open>
+          <a href="/" on:click={open}> <img src="bulb.svg" alt="lightbulb" /></a>
+        </div>
+      </Modal>
+    </nav>
 
-  <div class="wrapper">
-    <div class="radio-buttons">
-      {#each options as { value, text }}
-        <label for={text} class="hours">
-          <input
-            type="radio"
-            id={value}
-            {value}
-            bind:group={$hours}
-            on:change={() => handleInputChange()}
-          />
-          <span>{text} kWh/år</span></label
-        >
-      {/each}
+    <div class="wrapper">
+      <div class="radio-buttons">
+        {#each options as { value, text }}
+          <label for={text} class="hours">
+            <input
+              type="radio"
+              id={value}
+              {value}
+              bind:group={$hours}
+              on:change={() => handleInputChange()}
+            />
+            <span>{text} kWh/år</span></label
+          >
+        {/each}
+      </div>
+      <div class="circle">
+        <span style="--ctr:#FFE33E;--i:18px;--d:2.5s;" />
+        <span style="--ctr:#03a1d9;--i:13px;--d:5s;" />
+        <span style="--ctr:#ecfff1;--i:15px;--d:7.5s;" />
+        <span style="--ctr:#03ffa1a1;--i:20px;--d:10s;" />
+        <div class="price">
+          <h2>
+            {$price ? `${$price}` : '0'}
+          </h2>
+          <p>{$price ? 'öre/kWh' : 'öre/kWh'}</p>
+        </div>
+      </div>
+      <form>
+        <div class="select">
+          <select bind:value={selected.supplier} on:change={() => handleSupplier()}>
+            <option value="" disabled selected>Välj elleverantör</option>
+            {#each displaySuppliers as option}<option value={option}>{option}</option>{/each}
+          </select>
+        </div>
+        <div class="select">
+          <select bind:value={selected.bid_area} on:change={() => handleCurrentSupplier()}>
+            <option value="" disabled selected>Välj elområde</option>
+            {#each $bidArea as area}
+              <option value={area}>{area}</option>
+            {/each}
+          </select>
+        </div>
+        <div class="select">
+          <select bind:value={selected.contract} on:change={() => getPrice()}>
+            <option value="" disabled selected>Välj avtal</option>
+            {#each $contracts as contract}
+              <option value={contract}>{contract}</option>
+            {/each}
+          </select>
+        </div>
+      </form>
     </div>
-    <div class="circle">
-      <span style="--ctr:#FFE33E;--i:18px;--d:2.5s;" />
-      <span style="--ctr:#03a1d9;--i:13px;--d:5s;" />
-      <span style="--ctr:#ecfff1;--i:15px;--d:7.5s;" />
-      <span style="--ctr:#03ffa1a1;--i:20px;--d:10s;" />
-      <div class="price">
-        <h2>
-          {$price ? `${$price}` : '0'}
-        </h2>
-        <p>{$price ? 'öre/kWh' : 'öre/kWh'}</p>
-      </div>
-    </div>
-    <form>
-      <div class="select">
-        <select bind:value={selected.supplier} on:change={() => handleSupplier()}>
-          <option value="" disabled selected>Välj elleverantör</option>
-          {#each displaySuppliers as option}<option value={option}>{option}</option>{/each}
-        </select>
-      </div>
-      <div class="select">
-        <select bind:value={selected.bid_area} on:change={() => handleCurrentSupplier()}>
-          <option value="" disabled selected>Välj elområde</option>
-          {#each $bidArea as area}
-            <option value={area}>{area}</option>
-          {/each}
-        </select>
-      </div>
-      <div class="select">
-        <select bind:value={selected.contract} on:change={() => getPrice()}>
-          <option value="" disabled selected>Välj avtal</option>
-          {#each $contracts as contract}
-            <option value={contract}>{contract}</option>
-          {/each}
-        </select>
-      </div>
-    </form>
-  </div>
-</main>
-<footer>Byggd av <a target="/" href="https://sihamhadi.com">srh</a></footer>
+  </main>
+  <footer>Byggd av <a target="/" href="https://sihamhadi.com">srh</a></footer>
+</div>
 
 <style>
+  .container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
   main {
-    width: 100%;
+    flex: 1;
     padding-bottom: 15rem;
   }
   nav {
@@ -311,7 +318,7 @@
     padding: 1rem;
     font-size: 1.2rem;
     bottom: 0;
-    position: relative;
+    width: 100%;
   }
   footer a {
     text-decoration: none;
