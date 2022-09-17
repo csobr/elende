@@ -282,6 +282,7 @@
     font-size: 1.7rem;
     outline: 0;
     width: 100%;
+    color: var(--color);
   }
   .select {
     display: flex;
@@ -295,7 +296,6 @@
     border: 0;
     border-radius: 0.4rem;
     margin: 2.5rem;
-    color: var(--color);
   }
   .select:after {
     content: '🔻';
