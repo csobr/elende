@@ -1,6 +1,6 @@
 const date: Date = new Date();
-const fullDate = `${date.getFullYear()}-0${date.getMonth()}-15`;
-export const url = `${import.meta.env.VITE_HUS_URL}=${fullDate}`;
+const fullDate = `${date.getFullYear()}-0${date.getMonth() + 1}-15`;
+export const url = `${import.meta.env.VITE_URL_LGH}=${fullDate}`;
 
 export const getAllData = async (url: RequestInfo | URL) => {
   let result: Object[] = [];
