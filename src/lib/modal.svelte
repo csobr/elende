@@ -53,7 +53,7 @@
 
     <div class="content-wrapper">
       <span on:click={close}>Stäng</span>
-      <h1>Priserna gäller för October 2022</h1>
+      <h1>Priserna gäller för Oktober 2022</h1>
       <div class="content">
         <p>
           På den här sidan kan du ta del av elleverantörers priser/kWh för konsumenter med en
